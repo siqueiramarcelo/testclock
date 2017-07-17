@@ -42,8 +42,9 @@ class ViewController: UIViewController {
         let seconds = calendar.component(.second, from: date)
         
         // display
-        let output = String.localizedStringWithFormat("%02d:%02d:%02d", hour, minutes, seconds)
-        hourField.text = output
+        //let output = String.localizedStringWithFormat("%02d:%02d:%02d", hour, minutes, seconds)
+        let limitedOutput = String.localizedStringWithFormat("%02d:%02d", hour, minutes)
+        hourField.text = limitedOutput
         
     }
 
