@@ -31,7 +31,7 @@
                                     <fragment content="04:11">
                                         <attributes>
                                             <color key="NSColor" red="0.85098039215686272" green="0.36078431372549019" blue="0.36862745098039218" alpha="1" colorSpace="calibratedRGB"/>
-                                            <font key="NSFont" size="300" name="AvenirNextCondensed-Heavy"/>
+                                            <font key="NSFont" size="1000" name="AvenirNextCondensed-Heavy"/>
                                             <font key="NSOriginalFont" size="300" name="AvenirNextCondensed-Heavy"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="right" lineBreakMode="truncatingTail" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                         </attributes>
