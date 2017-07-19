@@ -28,6 +28,8 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        UIApplication.shared.isIdleTimerDisabled = true
+        
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.changeColorValue(_:)))
         hourField.addGestureRecognizer(tapGesture)
         
@@ -90,7 +92,7 @@ class ViewController: UIViewController {
         
         let savedColorIndex = UserDefaults.standard.integer(forKey: "colorIndex")
         
-        hourField.adjustsFontSizeToFitWidth = true
+        //hourField.adjustsFontSizeToFitWidth = true
         hourField.textColor = getColorByIndex(index: savedColorIndex)
         
     }
