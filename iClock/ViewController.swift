@@ -15,7 +15,8 @@ let colorBlue:UIColor = UIColor.init(red: 31/255, green: 178/255, blue: 193/255,
 let colorPink:UIColor = UIColor.init(red: 217/255, green: 92/255, blue: 94/255, alpha: 0.9)
 let colorGreen:UIColor = UIColor.init(red: 12/255, green: 212/255, blue: 156/255, alpha: 0.9)
 let colorAmber:UIColor = UIColor.init(red: 255/255, green: 179/255, blue: 71/255, alpha: 0.9)
-let totalColors: Int = 4
+let totalColors:Int = 4
+var deviceScreen:UIScreen = UIScreen()
 
 class ViewController: UIViewController {
     
@@ -28,6 +29,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        NotificationCenter.default.addObserver(self, selector: #selector(screenBrightnessDidChange(notification:)), name: .UIScreenBrightnessDidChange, object: nil)
         UIApplication.shared.isIdleTimerDisabled = true
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.changeColorValue(_:)))
@@ -116,6 +118,19 @@ class ViewController: UIViewController {
         }
         
         return currentColor
+        
+    }
+    
+    func screenBrightnessDidChange(notification: NSNotification) {
+        
+        //print("screenBrightnessDidChange")
+        
+        if let deviceScreen = notification.object {
+            
+            let deviceScreenBrightness = (deviceScreen as AnyObject).brightness
+            hourField.alpha = deviceScreenBrightness!
+            
+        }
         
     }
 
