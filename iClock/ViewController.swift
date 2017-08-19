@@ -134,7 +134,7 @@ class ViewController: UIViewController {
         
         if let deviceScreen = notification.object {
             
-            let deviceScreenBrightness = (deviceScreen as AnyObject).brightness!
+            let deviceScreenBrightness = (deviceScreen as! UIScreen).brightness
             hourField.alpha = deviceScreenBrightness >= minDisplayAlpha ? deviceScreenBrightness : minDisplayAlpha
             //print("setting alpha: ", hourField.alpha, " for brightness: ", deviceScreenBrightness)
         }
