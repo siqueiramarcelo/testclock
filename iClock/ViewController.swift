@@ -17,6 +17,7 @@ let colorGreen:UIColor = UIColor.init(red: 12/255, green: 212/255, blue: 156/255
 let colorAmber:UIColor = UIColor.init(red: 255/255, green: 179/255, blue: 71/255, alpha: 0.9)
 let totalColors:Int = 4
 var deviceScreen:UIScreen = UIScreen()
+var minDisplayAlpha:CGFloat = 0.3
 
 class ViewController: UIViewController {
     
@@ -29,7 +30,13 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // manage display alpha
+        let deviceScreenBrightness = UIScreen.main.brightness
+        hourField.alpha = deviceScreenBrightness >= minDisplayAlpha ? deviceScreenBrightness : minDisplayAlpha
+        print("starting with alpha: ", hourField.alpha)
         NotificationCenter.default.addObserver(self, selector: #selector(screenBrightnessDidChange(notification:)), name: .UIScreenBrightnessDidChange, object: nil)
+        
+        // don't let the device sleep
         UIApplication.shared.isIdleTimerDisabled = true
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.changeColorValue(_:)))
@@ -127,9 +134,9 @@ class ViewController: UIViewController {
         
         if let deviceScreen = notification.object {
             
-            let deviceScreenBrightness = (deviceScreen as AnyObject).brightness
-            hourField.alpha = deviceScreenBrightness!
-            
+            let deviceScreenBrightness = (deviceScreen as AnyObject).brightness!
+            hourField.alpha = deviceScreenBrightness >= minDisplayAlpha ? deviceScreenBrightness : minDisplayAlpha
+            //print("setting alpha: ", hourField.alpha, " for brightness: ", deviceScreenBrightness)
         }
         
     }
