@@ -45,7 +45,7 @@ class ViewController: UIViewController {
         setSavedColor()
         updateCounting()
         scheduledTimerWithTimeInterval()
-
+        
     }
 
     func scheduledTimerWithTimeInterval(){
@@ -84,6 +84,8 @@ class ViewController: UIViewController {
         
         userDefaults.set(index, forKey: "colorIndex")
         hourField.textColor = getColorByIndex(index: index)
+        
+        //self.displayReviewAlert()
         
     }
     
@@ -138,6 +140,25 @@ class ViewController: UIViewController {
             hourField.alpha = deviceScreenBrightness >= minDisplayAlpha ? deviceScreenBrightness : minDisplayAlpha
             //print("setting alpha: ", hourField.alpha, " for brightness: ", deviceScreenBrightness)
         }
+        
+    }
+    
+    func displayReviewAlert() {
+        
+        let alert = UIAlertController(title: "Hey! Did you like this clock?", message: "Share a review", preferredStyle: .alert)
+
+        alert.addAction(UIAlertAction(title: "Continue", style: UIAlertActionStyle.default, handler: { action in
+            
+            let reviewURL = "http://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?id=\("1260851662")&pageNumber=0&sortOrdering=2&type=Purple+Software&mt=8"
+            if let checkURL = NSURL(string: reviewURL) {
+                UIApplication.shared.openURL(checkURL as URL)
+            }
+            
+        }))
+        
+        alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel, handler: nil))
+        
+        self.present(alert, animated: true, completion: nil)
         
     }
 
