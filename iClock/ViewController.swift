@@ -31,9 +31,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         // manage display alpha
-        let deviceScreenBrightness = UIScreen.main.brightness
-        hourField.alpha = deviceScreenBrightness >= minDisplayAlpha ? deviceScreenBrightness : minDisplayAlpha
-        print("starting with alpha: ", hourField.alpha)
+        NotificationCenter.default.addObserver(self, selector: #selector(screenBrightnessDidChange(notification:)), name: .UIApplicationDidBecomeActive, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(screenBrightnessDidChange(notification:)), name: .UIScreenBrightnessDidChange, object: nil)
         
         // don't let the device sleep
@@ -134,12 +132,10 @@ class ViewController: UIViewController {
         
         //print("screenBrightnessDidChange")
         
-        if let deviceScreen = notification.object {
-            
-            let deviceScreenBrightness = (deviceScreen as! UIScreen).brightness
-            hourField.alpha = deviceScreenBrightness >= minDisplayAlpha ? deviceScreenBrightness : minDisplayAlpha
-            //print("setting alpha: ", hourField.alpha, " for brightness: ", deviceScreenBrightness)
-        }
+        let deviceScreenBrightness = UIScreen.main.brightness
+        hourField.alpha = deviceScreenBrightness >= minDisplayAlpha ? deviceScreenBrightness : minDisplayAlpha
+        
+        print("setting alpha: ", hourField.alpha, " for brightness: ", deviceScreenBrightness)
         
     }
     
